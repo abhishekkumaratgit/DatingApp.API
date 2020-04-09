@@ -1,11 +1,13 @@
 ﻿using DatingApp.API.Data;
 using DatingApp.API.DTOs;
 using DatingApp.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,7 @@ namespace DatingApp.API.Controllers
             config = configuration;
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserDTO user)
         {
@@ -39,6 +42,7 @@ namespace DatingApp.API.Controllers
             return StatusCode(201);
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDTO user)
         {
